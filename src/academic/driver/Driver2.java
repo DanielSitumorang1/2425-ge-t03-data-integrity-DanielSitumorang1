@@ -92,7 +92,7 @@ public class Driver2 {
         }
 
         // Cetak semua students
-        for (int i = studentCount - 1; i >= 0; i--) {
+        for (int i = 0 ; i < studentCount ; i++) {
             System.out.println(students[i].toString());
         }
 
