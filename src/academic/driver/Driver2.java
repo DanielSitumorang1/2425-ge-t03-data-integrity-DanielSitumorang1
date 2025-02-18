@@ -21,11 +21,13 @@ public class Driver2 {
         int studentCount = 0;
         int enrollmentCount = 0;
 
+        StringBuilder invalidEntries = new StringBuilder();
+
         while (true) {
             String line = input.nextLine().trim();
 
             if (line.equals("---")) {
-                break; 
+                break;
             }
 
             String[] data = line.split("#");
@@ -37,22 +39,44 @@ public class Driver2 {
                         courseCount++;
                     }
                     break;
-
-                    case "student-add":
+                case "student-add":
                     if (data.length == 5) {
                         students[studentCount] = new Student(data[1], data[2], data[3], data[4]);
                         studentCount++;
                     }
                     break;
-                
-
                 case "enrollment-add":
                     if (data.length == 5) {
-                        enrollments[enrollmentCount] = new Enrollment(data[1], data[2], data[3], data[4]);
-                        enrollmentCount++;
+                        String courseId = data[1];
+                        String studentId = data[2];
+                        
+                        boolean courseExists = false;
+                        boolean studentExists = false;
+                        
+                        for (int i = 0; i < courseCount; i++) {
+                            if (courses[i].getNim().equals(courseId)) {
+                                courseExists = true;
+                                break;
+                            }
+                        }
+                        
+                        for (int i = 0; i < studentCount; i++) {
+                            if (students[i].getNim().equals(studentId)) {
+                                studentExists = true;
+                                break;
+                            }
+                        }
+                        
+                        if (!courseExists) {
+                            invalidEntries.append("invalid course|").append(courseId).append("\n");
+                        } else if (!studentExists) {
+                            invalidEntries.append("invalid student|").append(studentId).append("\n");
+                        } else {
+                            enrollments[enrollmentCount] = new Enrollment(data[1], data[2], data[3], data[4]);
+                            enrollmentCount++;
+                        }
                     }
                     break;
-
                 default:
                     System.out.println("Error: Perintah tidak dikenali.");
             }
@@ -60,13 +84,15 @@ public class Driver2 {
 
         input.close();
 
+        System.out.print(invalidEntries.toString());
+
         // Cetak semua courses
-        for (int i = 0; i < courseCount; i++) {
+        for (int i = courseCount - 1; i >= 0; i--) {
             System.out.println(courses[i].toString());
         }
 
         // Cetak semua students
-        for (int i = 0; i < studentCount; i++) {
+        for (int i = studentCount - 1; i >= 0; i--) {
             System.out.println(students[i].toString());
         }
 
@@ -74,5 +100,8 @@ public class Driver2 {
         for (int i = 0; i < enrollmentCount; i++) {
             System.out.println(enrollments[i].toString());
         }
+        
+      
+   
     }
 }
