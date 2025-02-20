@@ -17,6 +17,7 @@ public class Driver2 {
         Student[] students = new Student[100];
         Enrollment[] enrollments = new Enrollment[100];
 
+        
         int courseCount = 0;
         int studentCount = 0;
         int enrollmentCount = 0;
