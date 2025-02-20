@@ -86,22 +86,18 @@ public class Driver2 {
 
         System.out.print(invalidEntries.toString());
 
-        // Cetak semua courses
+      
         for (int i = courseCount - 1; i >= 0; i--) {
             System.out.println(courses[i].toString());
         }
 
-        // Cetak semua students
         for (int i = 0 ; i < studentCount ; i++) {
             System.out.println(students[i].toString());
         }
 
-        // Cetak semua enrollments
         for (int i = 0; i < enrollmentCount; i++) {
             System.out.println(enrollments[i].toString());
         }
         
-      
-   
     }
 }
